@@ -1,6 +1,7 @@
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
+// creating the parallel mergesort class
 public class ParallelMergeSort {
     public static void main(String[] args) {
         long startTime;
@@ -21,13 +22,14 @@ public class ParallelMergeSort {
 
         
     }
-
+    // implementation of parallel merge method
     public static void parallelMergeSort(int[] array) {
+        // creating the thread pool
         SortTask mainTask = new SortTask(array);
         ForkJoinPool pool = new ForkJoinPool();
         pool.invoke(mainTask);
     }
-
+    // intialising the SortTask class and extending the RecursiveAction 
     private static class SortTask extends RecursiveAction {
         private int[] array;
 
@@ -52,6 +54,7 @@ public class ParallelMergeSort {
             }
         }
     }
+    // normal merge sort function
     public static void merge(int[] firstHalf, int[] secondHalf, int[] array) {
         int CIF = 0; 
         int CIS = 0; 
