@@ -77,7 +77,7 @@ int main() {
     // calling the mergesort function
     merge_sort(arr, 0, size- 1);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < size; i++) {
         cout << arr[i] << " ";
     }
     cout << endl;
