@@ -1,8 +1,9 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <algorithm>
+#include <random>
 
+using namespace std;
 void quicksort(std::vector<int>& arr, int left, int right) {
     if (left >= right) {
         return;
@@ -29,11 +30,11 @@ void quicksort(std::vector<int>& arr, int left, int right) {
 }
 
 int main() {
-   const int size = 10000;
+   const int size = 10;
     const int range_min = 0;
     const int range_max = 100;
 
-    random_device rd;
+   random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dis(range_min, range_max);
 
@@ -41,10 +42,16 @@ int main() {
     for (int i = 0; i < size; i++) {
         arr[i] = dis(gen);
     }
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout<<endl;
 
 
     quicksort(arr, 0, size - 1);
-
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
 
     return 0;
 }
