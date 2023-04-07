@@ -3,15 +3,15 @@
 #include <vector>
 #include <random>
 
-using namespace std;
+//using namespace std;
 
 // merging the splited arrays
-void merge(vector<int>& arr, int l, int m, int r) {
+void merge(std::vector<int>& arr, int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
 
-    vector<int> L(n1);
-    vector<int> R(n2);
+    std::vector<int> L(n1);
+    std::vector<int> R(n2);
 
     for (int i = 0; i < n1; i++) {
         L[i] = arr[l + i];
@@ -47,12 +47,12 @@ void merge(vector<int>& arr, int l, int m, int r) {
 }
 
 // mergesort implementation
-void merge_sort(vector<int>& arr, int l, int r) {
+void merge_sort(std::vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
         //intialization of the thread with two arrays 
-        thread t1(merge_sort, ref(arr), l, m);
-        thread t2(merge_sort, ref(arr), m + 1, r);
+        std::thread t1(merge_sort, ref(arr), l, m);
+        std::thread t2(merge_sort, ref(arr), m + 1, r);
         // waiting for sort function to complete
         t1.join();
         t2.join();
@@ -62,26 +62,29 @@ void merge_sort(vector<int>& arr, int l, int r) {
 }
 
 int main() {
-    const int size = 10000;
+    const int size = 10;
     const int range_min = 0;
     const int range_max = 100;
 // genarating the random integers
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dis(range_min, range_max);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(range_min, range_max);
 
     std::vector<int> arr(size);
     for (int i = 0; i < size; i++) {
         arr[i] = dis(gen);
     }
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout<<std::endl;
     // calling the mergesort function
     merge_sort(arr, 0, size- 1);
 
     for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+        std::cout << arr[i] << " ";
     }
-    cout << endl;
+
 
     return 0;
 }
-
